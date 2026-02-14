@@ -1,4 +1,4 @@
-name: SLSA Go releaser
+name: SLSA GoReleaser
 
 on:
   push:
@@ -10,10 +10,18 @@ permissions:
   id-token: write
 
 jobs:
-  release:
-    uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go.yml@v1
-    with:
-      go-version: 1.19
+  goreleaser:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: SLSA GoReleaser builder
+        uses: slsa-framework/slsa-github-generator/actions/goreleaser@v2
+        with:
+          go-version: 1.19
+
 
 
 
